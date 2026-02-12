@@ -5,34 +5,13 @@ import "./Sidebar.css";
 
 function Sidebar({ open, setOpen }) {
   const sidebarVariants = {
-    closed: {
-      x: "-100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40
-      }
-    },
-    open: {
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40
-      }
-    }
+    closed: { x: "-100%", transition: { type: "spring", stiffness: 400, damping: 40 } },
+    open: { x: 0, transition: { type: "spring", stiffness: 400, damping: 40 } },
   };
 
   const linkVariants = {
     closed: { opacity: 0, x: -20 },
-    open: (i) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.3
-      }
-    })
+    open: (i) => ({ opacity: 1, x: 0, transition: { delay: i * 0.1, duration: 0.3 } }),
   };
 
   const menuItems = [
@@ -42,7 +21,14 @@ function Sidebar({ open, setOpen }) {
     { path: "/ServicesSection", label: "⚡ Services" },
     { path: "/contact", label: "📞 Contact" },
     { path: "/login", label: "🔐 Login" },
-    { path: "/signup", label: "✨ Sign Up" }
+    { path: "/signup", label: "✨ Sign Up" },
+  ];
+
+  const socialLinks = [
+    { href: "https://facebook.com", icon: "📘" },
+    { href: "https://twitter.com", icon: "🐦" },
+    { href: "https://instagram.com", icon: "📸" },
+    { href: "https://linkedin.com", icon: "💼" },
   ];
 
   return (
@@ -65,11 +51,9 @@ function Sidebar({ open, setOpen }) {
           >
             <div className="sidebar-header">
               <h2 className="sidebar-title">CodeCraft Academy</h2>
-              <button className="sidebar-close" onClick={() => setOpen(false)}>
-                ✕
-              </button>
+              <button className="sidebar-close" onClick={() => setOpen(false)}>✕</button>
             </div>
-            
+
             <div className="sidebar-user">
               <div className="user-avatar">👨‍💻</div>
               <div className="user-info">
@@ -80,16 +64,8 @@ function Sidebar({ open, setOpen }) {
 
             <nav className="sidebar-nav">
               {menuItems.map((item, index) => (
-                <motion.div
-                  key={item.path}
-                  custom={index}
-                  variants={linkVariants}
-                >
-                  <Link
-                    to={item.path}
-                    className="sidebar-link"
-                    onClick={() => setOpen(false)}
-                  >
+                <motion.div key={item.path} custom={index} variants={linkVariants}>
+                  <Link to={item.path} className="sidebar-link" onClick={() => setOpen(false)}>
                     <span className="link-icon">→</span>
                     {item.label}
                   </Link>
@@ -99,10 +75,17 @@ function Sidebar({ open, setOpen }) {
 
             <div className="sidebar-footer">
               <div className="social-links">
-                <a href="#" className="social-icon">📘</a>
-                <a href="#" className="social-icon">🐦</a>
-                <a href="#" className="social-icon">📸</a>
-                <a href="#" className="social-icon">💼</a>
+                {socialLinks.map((social, idx) => (
+                  <a
+                    key={idx}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
               </div>
               <p className="sidebar-copyright">© 2024 CodeCraft Academy</p>
             </div>
