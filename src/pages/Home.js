@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import courses from '../data';
-import About from './About';
+//import About from './About';
 import Contact from './Contact';
 import Testimonials from "../components/Testimonials";  // NEW
 import FAQ from "../components/FAQ";                  // NEW
@@ -45,7 +45,7 @@ function Home() {
       <FAQ />
 
       {/* About + Contact */}
-      <About />
+      
       <Contact />
 
       {/* WhatsApp Floating Button */}

@@ -17,7 +17,6 @@ function Sidebar({ open, setOpen }) {
   const menuItems = [
     { path: "/", label: "🏠 Home" },
     { path: "/courses", label: "📚 Courses" },
-    { path: "/about", label: "🎯 About Us" },
     { path: "/ServicesSection", label: "⚡ Services" },
     { path: "/contact", label: "📞 Contact" },
     { path: "/login", label: "🔐 Login" },
