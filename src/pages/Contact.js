@@ -24,26 +24,28 @@ function Contact() {
   return (
     <div className="contact-main">
       <div className="contact-hero">
-        <h1>Contact Me</h1>
-        <p>I'm a professional Web Developer offering creative and reliable services.</p>
-        <p>Let’s collaborate to build powerful websites that deliver results.</p>
+        <h1 id='c'>Contact Me</h1>
+        <p id='a'>I'm a professional Web Developer offering creative and reliable services.</p>
+        <p id='a'>Let’s collaborate to build powerful websites that deliver results.</p>
+        <p id='a'><b>Email: ankitrajputpubg1185@gmail.com</b></p>
       </div>
 
       <div className="contact-section">
         <div className="contact-info">
-          <h2>What I Offer</h2>
+          <h2 id='c1'>What I Offer</h2>
           <ul>
-            <li>✅ Custom Business Websites</li>
-            <li>✅ E-commerce Development</li>
-            <li>✅ WordPress & CMS Solutions</li>
-            <li>✅ Mobile-Responsive Designs</li>
-            <li>✅ SEO Optimization</li>
-            <li>✅ Speed & Security</li>
+           <li><b>🎓 Online Courses with Certificates</b></li>
+<li><b>📚 Beginner to Advanced Learning Paths</b></li>
+<li><b>💻 Practical Coding & Tech Courses</b></li>
+<li><b>📝 Quizzes, Assignments & Projects</b></li>
+<li><b>📱 Mobile Friendly Learning</b></li>
+<li><b>🏆 Skill-Based Certification</b></li>
+
           </ul>
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>
-          <h2>Send Me a Message</h2>
+          <h2 id='c'>Send Me a Message</h2>
           <input
             type="text"
             name="name"

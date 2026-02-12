@@ -1,79 +1,128 @@
-import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ref, set } from 'firebase/database';
-import { auth, db } from '../firebase';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, set } from "firebase/database";
+import { auth, db } from "../firebase";
 
-function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function Signup() {
+  const [formData, setFormData] = useState({ 
+    name: "", 
+    email: "", 
+    password: "",
+    confirmPassword: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords don't match ❌");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      // Create user with email and password
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
       const user = userCredential.user;
-      
-      // Save user data to Realtime Database
-      await set(ref(db, 'users/' + user.uid), {
-        name: name,
-        email: email,
-        createdAt: new Date().toISOString()
+
+      await updateProfile(user, { displayName: formData.name });
+
+      await set(ref(db, "users/" + user.uid), {
+        name: formData.name,
+        email: formData.email,
+        createdAt: new Date().toISOString(),
+        role: "student",
+        coursesEnrolled: []
       });
-      
-      setMessage('Registration successful! User information saved.');
-      // Clear form
-      setName('');
-      setEmail('');
-      setPassword('');
+
+      toast.success("🎉 Signup Successful! Welcome to CodeCraft!");
+
+      setTimeout(() => navigate("/"), 2000);
+
     } catch (error) {
-      setMessage('Error: ' + error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
-      <h2>User Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
-          <label>Name: </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
+    <div className="auth-page">
+      <ToastContainer position="top-center" autoClose={2000} />
+
+      <div className="auth-container">
+        <div className="auth-header">
+          <h2 className="auth-title">Join CodeCraft</h2>
+          <p className="auth-subtitle">Start your coding journey today</p>
         </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label>Email: </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <div className="input-group">
+              <span className="input-icon">👤</span>
+              <input name="name" id="name" placeholder="John Doe" onChange={handleChange} required />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <div className="input-group">
+              <span className="input-icon">📧</span>
+              <input type="email" name="email" id="email" placeholder="you@example.com" onChange={handleChange} required />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <div className="input-group">
+              <span className="input-icon">🔒</span>
+              <input type="password" name="password" id="password" placeholder="••••••••" onChange={handleChange} required minLength="6" />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="input-group">
+              <span className="input-icon">✅</span>
+              <input type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••••" onChange={handleChange} required />
+            </div>
+          </div>
+
+          <label className="checkbox terms">
+            <input type="checkbox" required />
+            <span>
+              I agree to the <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>
+            </span>
+          </label>
+
+          <button type="submit" className="auth-btn" disabled={loading}>
+            {loading ? "Creating Account..." : "Create Account"}
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p>
+            Already have an account? <Link to="/login">Sign in here</Link>
+          </p>
         </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label>Password: </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
-        </div>
-        <button type="submit" style={{ padding: '10px 15px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px' }}>
-          Register
-        </button>
-      </form>
-      {message && <p style={{ marginTop: '15px', color: message.includes('Error') ? 'red' : 'green' }}>{message}</p>}
+      </div>
     </div>
   );
 }
 
-export default SignUp;
+export default Signup;

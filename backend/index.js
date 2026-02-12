@@ -1,27 +1,54 @@
-const express = require('express');
-const app = express();
-const PORT = 5000;
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-// Middleware to parse JSON
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-// Basic route
-app.get('/', (req, res) => {
-  res.send('Welcome to the Express backend!');
+// MongoDB Connection
+mongoose
+  .connect("mongodb://127.0.0.1:27017/onlineLearning")
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
+
+// User Schema
+const UserSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
 });
 
-// Example API endpoint
-app.get('/api/data', (req, res) => {
-  res.json({ message: 'This is some JSON data from the backend' });
+const User = mongoose.model("users", UserSchema);
+
+// Signup API with Duplicate Email Check
+app.post("/signup", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.send({ message: "User already exists with this email" });
+    }
+
+    const user = new User(req.body);
+    await user.save();
+    res.send({ message: "Signup Successful!" });
+
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
 });
 
-// POST endpoint example
-app.post('/api/post', (req, res) => {
-  const userData = req.body;
-  res.json({ message: 'Data received', data: userData });
+// Login API
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) return res.send({ message: "User not found" });
+  if (user.password !== password) return res.send({ message: "Wrong password" });
+
+  res.send({ message: "Login Successful", user });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+app.listen(5000, () => console.log("Server running on port 5000"));

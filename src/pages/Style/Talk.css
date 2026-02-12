@@ -1,0 +1,194 @@
+/* Main Container */
+.Talk-container {
+  width: 100%;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: #f9f9f9;
+}
+
+/* Hero Section */
+.Talk-hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.Talk-hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.Talk-hero p {
+  font-size: 18px;
+}
+
+/* Stats Section */
+.Talk-stats-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.Talk-stat-item {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Talk-stat-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+.Talk-stat-label {
+  font-size: 16px;
+  color: #444;
+}
+
+/* Service Section */
+.Talk-section {
+  margin-top: 50px;
+}
+
+.Talk-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.Talk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.Talk-service-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Talk-service-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.Talk-service-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Talk-service-duration {
+  color: #06b6d4;
+  font-weight: bold;
+}
+
+.Talk-service-description {
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.Talk-service-price {
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+/* Testimonials Section */
+.Talk-testimonials-section {
+  margin-top: 60px;
+}
+
+.Talk-section-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.Talk-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.Talk-testimonial-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Talk-testimonial-text {
+  font-style: italic;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.Talk-testimonial-author {
+  font-weight: bold;
+  color: #222;
+}
+
+.Talk-testimonial-role {
+  font-size: 14px;
+  color: #444;
+}
+
+.Talk-testimonial-service {
+  color: #4f46e5;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Contact Method Section */
+.Talk-contact-methods-section {
+  margin-top: 60px;
+}
+
+.Talk-contact-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.Talk-contact-method {
+  text-align: center;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Talk-contact-icon {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.Talk-contact-detail {
+  font-size: 15px;
+  color: #333;
+}
+
+/* Fade Animation */
+.fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#H{
+    color:white;
+}
