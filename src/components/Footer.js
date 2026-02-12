@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -20,8 +19,8 @@ function Footer() {
         <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-icons">
-            <a href="https://github.com/Ankit-Kumar-Rajput1?tab=repositories" target="_blank">🐙</a>
-            <a href="https://www.linkedin.com/in/ankit-kumar-14a162291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">🔗</a>
+            <a href="https://github.com/Ankit-Kumar-Rajput1?tab=repositories" target="_blank" rel="noreferrer">🐙</a>
+            <a href="https://www.linkedin.com/in/ankit-kumar-14a162291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noreferrer">🔗</a>
           </div>
         </div>
 

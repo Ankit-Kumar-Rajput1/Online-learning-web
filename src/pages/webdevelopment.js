@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLaptopCode, FaCode, FaWordpress, FaMobileAlt, FaCloud } from 'react-icons/fa';
+import { FaLaptopCode, FaWordpress, FaMobileAlt, FaCloud } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import "../App.css"
 
@@ -11,9 +11,10 @@ const App = () => {
         <div className="hero-content">
           <FaLaptopCode className="hero-icon" />
           <h1>Professional Website Development Services</h1>
-          <p className="hero-subtitle">Crafting stunning, high-performing websites for businesses of all sizes. 
-  Our team blends creativity with cutting-edge technology to deliver seamless, user-friendly experiences. 
-</p>
+          <p className="hero-subtitle">
+            Crafting stunning, high-performing websites for businesses of all sizes. 
+            Our team blends creativity with cutting-edge technology to deliver seamless, user-friendly experiences. 
+          </p>
         </div>
       </section>
 
@@ -139,22 +140,18 @@ const App = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section" >
+      <section className="cta-section">
         <div className="section-container">
           <h2>Start Your Website Journey with Us!</h2>
           <p>
             Contact our expert team today and let's create a website that stands out and drives results.
           </p>
           <div className="cta-buttons">
-            <Link to='/Talk' className="primary-button">
-              Let's Talk
-            </Link>
-            <Link to="/portfolio" className="secondary-button">
-              See Our Work
-            </Link>
+            <Link to='/Talk' className="primary-button">Let's Talk</Link>
+            <Link to="/portfolio" className="secondary-button">See Our Work</Link>
           </div>
         </div>
-      </section>  
+      </section>
     </div>
   );
 };
